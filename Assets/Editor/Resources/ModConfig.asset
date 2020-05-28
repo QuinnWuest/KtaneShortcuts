@@ -14,7 +14,10 @@ MonoBehaviour:
   id: shortcuts
   title: Shortcuts
   author: Goofy
-  description: Let's test your knowledge about some shortcuts.
+  description: 'Let''s test your knowledge about some shortcuts.
+
+
+    Featuring TwitchPlays Support!'
   version: 1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 68a8170bf2786574a9d1d0fc3d40adea, type: 3}
