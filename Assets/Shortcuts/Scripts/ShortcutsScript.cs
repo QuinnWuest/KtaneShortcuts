@@ -373,12 +373,6 @@ public class ShortcutsScript : MonoBehaviour
         new Shortcut
         {
             Topic = "Windows",
-            Command = "Windows Key+Break",
-            Answer = "Open system properties"
-        },
-        new Shortcut
-        {
-            Topic = "Windows",
             Command = "Windows Key+F",
             Answer = "Open search for\nfiles and folders"
         },
