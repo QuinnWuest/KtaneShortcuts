@@ -12,12 +12,20 @@ MonoBehaviour:
   m_Name: ModConfig
   m_EditorClassIdentifier: 
   id: shortcuts
-  title: Shortcuts
+  title: Shortcuts [REUPLOAD]
   author: Goofy
   description: 'Let''s test your knowledge about some shortcuts.
 
 
-    Featuring TwitchPlays Support!'
+    This is a reupload of Goofy''s module with changes and bug fixes. Unsubscribe
+    from the old version here:
+
+    https://steamcommunity.com/sharedfiles/filedetails/?id=2111127263
+
+
+    [url=https://ktane.timwi.de/HTML/Shortcuts.html]Manual HTML[/url]
+
+    [url=https://ktane.timwi.de/PDF/Shortcuts.pdf]Manual PDF[/url]'
   version: 1.0
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: 68a8170bf2786574a9d1d0fc3d40adea, type: 3}
+  previewImage: {fileID: 2800000, guid: 16be6b3c56da2514c90de03e96f2679e, type: 3}

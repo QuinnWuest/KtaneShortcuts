@@ -16,12 +16,13 @@ public class ShortcutsScript : MonoBehaviour
     public TextMesh[] Screens;
     public TextMesh[] ButtonScreens;
 
-    static int moduleIdCounter = 1;
-    int moduleId;
-    bool moduleSolved;
-    int correctAnswer;
-    int solvedStages = 0;
-    int stages;
+    private int moduleId;
+    private static int moduleIdCounter = 1;
+    private bool moduleSolved;
+
+    private int correctAnswer;
+    private int solvedStages;
+    private const int stages = 7;
 
     struct Shortcut
     {
@@ -30,9 +31,9 @@ public class ShortcutsScript : MonoBehaviour
         public string Answer;
     }
 
-    List<Shortcut> answers = new List<Shortcut>();
+    private List<Shortcut> answers = new List<Shortcut>();
 
-    List<Shortcut> shortcuts = new List<Shortcut>()
+    private static readonly List<Shortcut> shortcuts = new List<Shortcut>()
     {
         new Shortcut
         {
@@ -1746,39 +1747,22 @@ public class ShortcutsScript : MonoBehaviour
     void Start()
     {
         moduleId = moduleIdCounter++;
-        stages = rnd.Range(10, 16);
         for (int i = 0; i < Buttons.Length; i++)
-        {
             Buttons[i].OnInteract += ButtonPress(i);
-        }
         Generate();
     }
 
     void Generate()
     {
-        tryAgain:
-        answers.Clear();
-        var ixs = Enumerable.Range(0, shortcuts.Count()).ToList();
-        ixs.Shuffle();
-        for (int i = 0; i < 4; i++)
-        {
-            answers.Add(shortcuts[ixs[i]]);
-            if (i < 4)
-            {
-                if (answers.Any(sh => sh.Answer.Equals(shortcuts[ixs[i + 1]].Answer)))
-                {
-                    Debug.LogFormat(@"<Shortcuts #{0}> Found a duplicate answer, generating new.", moduleId);
-                    goto tryAgain;
-                }
-            }
-        }
+        var rndTopic = shortcuts.PickRandom().Topic;
+        var topicsToPick = shortcuts.Where(i => i.Topic == rndTopic).ToArray().Shuffle();
+        answers = topicsToPick.Take(4).ToList();
+
         correctAnswer = rnd.Range(0, answers.Count());
         Screens[0].text = answers[correctAnswer].Topic.ToUpperInvariant();
         Screens[1].text = answers[correctAnswer].Command.ToUpperInvariant();
         for (int i = 0; i < ButtonScreens.Length; i++)
-        {
             ButtonScreens[i].text = answers[i].Answer.ToUpperInvariant();
-        }
         Debug.LogFormat(@"[Shortcuts #{0}] Stage: {1} - Topic: {2}, Shortcut: {3}, Answer: {4}.", moduleId, solvedStages + 1, answers[correctAnswer].Topic.ToUpperInvariant(), answers[correctAnswer].Command.ToUpperInvariant(), answers[correctAnswer].Answer.ToUpperInvariant());
     }
 
