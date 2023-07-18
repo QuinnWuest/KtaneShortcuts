@@ -1767,7 +1767,7 @@ public class ShortcutsScript : MonoBehaviour
     }
 
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"!{0} 1234 [press the corresponding button, 1=TL, 2=TR, 3=BL, 4=BR]";
+    private readonly string TwitchHelpMessage = @"!{0} 1234 [press the corresponding button, 1=TL, 2=TR, 3=BL, 4=BR]. | !{0} buttons [Send the button labels to chat.]";
 #pragma warning restore 414
     IEnumerator ProcessTwitchCommand(string command)
     {
@@ -1782,6 +1782,12 @@ public class ShortcutsScript : MonoBehaviour
             yield return null;
             var btn = int.Parse(m.Groups[0].Value);
             Buttons[btn-1].OnInteract();
+            yield break;
+        }
+        else if (Regex.IsMatch(command, @"^\s*buttons\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+        {
+            yield return null;
+            yield return "sendtochat The buttons on Shortcuts read: \"" + ButtonScreens[0].text + "\", \"" + ButtonScreens[1].text + "\", \"" + ButtonScreens[2].text + "\", \"" + ButtonScreens[3].text + "\".";
             yield break;
         }
         else
