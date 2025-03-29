@@ -1754,9 +1754,12 @@ public class ShortcutsScript : MonoBehaviour
 
     void Generate()
     {
+        newAnswers:
         var rndTopic = shortcuts.PickRandom().Topic;
         var topicsToPick = shortcuts.Where(i => i.Topic == rndTopic).ToArray().Shuffle();
         answers = topicsToPick.Take(4).ToList();
+        if (answers.Distinct().Count() != 4)
+            goto newAnswers;
 
         correctAnswer = rnd.Range(0, answers.Count());
         Screens[0].text = answers[correctAnswer].Topic.ToUpperInvariant();
